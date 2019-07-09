@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <h1>黑马后台管理</h1>
+    <!-- 一级路由渲染的位置 -->
+    <router-view></router-view>
   </div>
 </template>
 
