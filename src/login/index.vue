@@ -93,7 +93,7 @@ export default {
   position: absolute;
   left: 0;
   top: 0;
-  background-image: url(../assets/images/s1.jpg);
+  background-image: url('../assets/images/loginbg.jpg');
   background: no-repeat center / cover;
   .login_box{
     width: 450px;
