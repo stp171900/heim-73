@@ -51,10 +51,10 @@
               style="vertical-align:middle"
               width="30"
               height="30"
-              src="../assets/images/avatar.jpg"
+              src="../../assets/images/s(15).jpg"
               alt
             />
-            <b style="vertical-align:middle;padding-left:5px">黑马小哥</b>
+            <b style="vertical-align:middle;padding-left:5px">黑马我詹</b>
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
@@ -63,7 +63,10 @@
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
-      <el-main>Main</el-main>
+      <el-main>
+        <!-- 显示二级路由对应的组件 -->
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -95,11 +98,11 @@ export default {
     .logo {
       width: 100%;
       height: 60px;
-      background: #002840 url("../assets/images/logo_admin.png") no-repeat
+      background: #002840 url("../../assets/images/logo_admin.png") no-repeat
         center / 140px auto;
     }
     .close {
-      background-image: url("../assets/images/logo_admin_01.png");
+      background-image: url("../../assets/images/logo_admin_01.png");
       background-size: 36px auto;
     }
   }
