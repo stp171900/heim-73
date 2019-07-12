@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 import login from '../login/index.vue'
 import Home from '../views/home/home'
 import Welcome from '../views/welcome/welcome'
-import NotFond from '../views/404/index'
+import NotFound from '../views/404/index'
 
 Vue.use(VueRouter)
 
@@ -19,7 +19,7 @@ const router = new VueRouter({
       ]
     },
     // 路径到这里，证明没有程序去处理当前路径
-    { path: '*', name: '404', component: NotFond }
+    { path: '*', name: '404', component: NotFound }
   ]
 })
 export default router
