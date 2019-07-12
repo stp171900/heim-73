@@ -13,10 +13,10 @@ export default {
 <style lang='less'>
     .wecome{
         img{
-        position: absolute;
+        position: relative;
         left: 50%;
         top: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%,16%);
     }
     }
 </style>
