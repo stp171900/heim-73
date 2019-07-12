@@ -22,4 +22,9 @@ const router = new VueRouter({
     { path: '*', name: '404', component: NotFound }
   ]
 })
+router.beforeEach((to, from, next) => {
+  const user = window.sessionStorage.getItem('heim-73')
+  if (to.path !== '/login' && !user) return next('/login')
+  next()
+})
 export default router

@@ -62,7 +62,7 @@ export default {
   methods: {
     login () {
       // 整体表单校验
-      this.$refs.loginForm.validator((valid) => {
+      this.$refs.loginForm.validate(valid => {
         if (valid) {
           // 校验成功，登录
           this.$ajax
@@ -73,6 +73,9 @@ export default {
               // 后台的返回的json内容  已经转换成了对象
               console.log(data)
               // 登录成功后 跳转到首页，保存登录状态
+              // 保存登录后保存的用户信息，包含token
+              // 使用sessionStorage 来存储， 关闭浏览器会话失效
+              window.sessionStorage.setItem('heim-73', JSON.stringify(res.data.data))
               this.$router.push('/')
             })
             .catch(() => {
