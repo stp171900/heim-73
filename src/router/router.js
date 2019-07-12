@@ -22,4 +22,19 @@ const router = new VueRouter({
     { path: '*', name: '404', component: NotFond }
   ]
 })
+
+// 註冊全局的前置守衛
+router.beforeEach((to, from, next) => {
+  // 如果不主動觸發， resove  一直等待
+  // console.log('ok')
+  // 如果是登錄頁 放行   to.path將要跳轉的路徑
+  // if (to.path === '/login') return next()
+  // 判斷登錄狀態
+  const user = window.sessionStorage.getItem('heim-73')
+  if (to.path !== '/login' && user) {
+    next()
+  } else {
+    next('/login')
+  }
+})
 export default router
