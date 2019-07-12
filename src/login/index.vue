@@ -73,8 +73,6 @@ export default {
               // 后台的返回的json内容  已经转换成了对象
               console.log(data)
               // 登录成功后 跳转到首页，保存登录状态
-              // sessionStorage存儲  关闭浏览器会话失效   JSON.stringify json格式的字符串
-              window.sessionStorage.setItem('heim-73', JSON.stringify(res.data))
               this.$router.push('/')
             })
             .catch(() => {
