@@ -10,32 +10,33 @@
         style="border-right:none"
         :collapse="collapse"
         :collapse-transition='false'
+        router
       >
-        <el-menu-item index="1">
+        <el-menu-item index="/">
           <i class="el-icon-menu"></i>
           <span slot="title">首页</span>
         </el-menu-item>
-        <el-menu-item index="2">
+        <el-menu-item index="/neir">
           <i class="el-icon-tickets"></i>
           <span slot="title">内容管理</span>
         </el-menu-item>
-        <el-menu-item index="3">
+        <el-menu-item index="/img">
           <i class="el-icon-s-flag"></i>
           <span slot="title">素材管理</span>
         </el-menu-item>
-        <el-menu-item index="4">
+        <el-menu-item index="/fab">
           <i class="el-icon-s-promotion"></i>
           <span slot="title">发布文章</span>
         </el-menu-item>
-        <el-menu-item index="5">
+        <el-menu-item index="/pinl">
           <i class="el-icon-chat-line-square"></i>
           <span slot="title">评论管理</span>
         </el-menu-item>
-        <el-menu-item index="6">
+        <el-menu-item index="/fans">
           <i class="el-icon-s-custom"></i>
           <span slot="title">粉丝管理</span>
         </el-menu-item>
-        <el-menu-item index="7">
+        <el-menu-item index="/setting">
           <i class="el-icon-s-tools"></i>
           <span slot="title">个人设置</span>
         </el-menu-item>
