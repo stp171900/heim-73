@@ -62,26 +62,39 @@ export default {
   methods: {
     login () {
       // 整体表单校验
-      this.$refs.loginForm.validate(valid => {
+      // this.$refs.loginForm.validate(valid => {
+      //   if (valid) {
+      //     // 校验成功，登录
+      //     this.$ajax
+      //       .post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
+      //       .then(res => {
+      //         // res 是响应对象  包含响应数据
+      //         const data = res.data
+      //         // 后台的返回的json内容  已经转换成了对象
+      //         console.log(data)
+      //         // 登录成功后 跳转到首页，保存登录状态
+      //         // 保存登录后保存的用户信息，包含token
+      //         // 使用sessionStorage 来存储， 关闭浏览器会话失效
+      //         window.sessionStorage.setItem('heim-73', JSON.stringify(res.data.data))
+      //         this.$router.push('/')
+      //       })
+      //       .catch(() => {
+      //         // 提示错误  使用组件  消息提示组件
+      //         this.$message.error('用户名或密码错误')
+      //       })
+      //   }
+      // })
+      this.$refs.loginForm.validate(async valid => {
         if (valid) {
-          // 校验成功，登录
-          this.$ajax
-            .post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
-            .then(res => {
-              // res 是响应对象  包含响应数据
-              const data = res.data
-              // 后台的返回的json内容  已经转换成了对象
-              console.log(data)
-              // 登录成功后 跳转到首页，保存登录状态
-              // 保存登录后保存的用户信息，包含token
-              // 使用sessionStorage 来存储， 关闭浏览器会话失效
-              window.sessionStorage.setItem('heim-73', JSON.stringify(res.data.data))
-              this.$router.push('/')
-            })
-            .catch(() => {
-              // 提示错误  使用组件  消息提示组件
-              this.$message.error('用户名或密码错误')
-            })
+          // 当借口调用失败的时候 一下代码出现异常
+          // try{ 业务逻辑 }catch(err){ 业务逻辑失败调用catch,进行错误的处理 }
+          try {
+            const res = await this.$ajax.post('authorizations', this.loginForm)
+            window.sessionStorage.setItem('heim-73', JSON.stringify(res.data.data))
+            this.$router.push('/')
+          } catch (err) {
+            this.$message.error('用户名或密码错误')
+          }
         }
       })
     }

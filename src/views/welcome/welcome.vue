@@ -6,7 +6,9 @@
 
 <script>
 export default {
-
+//   created () {
+//     this.$ajax.get('articles').then(res => console.log(res.data))
+//   }
 }
 </script>
 

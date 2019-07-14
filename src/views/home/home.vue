@@ -52,15 +52,15 @@
               style="vertical-align:middle"
               width="30"
               height="30"
-              src="../../assets/images/s(15).jpg"
+              :src="avatar"
               alt
             />
-            <b style="vertical-align:middle;padding-left:5px">黑马我詹</b>
+            <b style="vertical-align:middle;padding-left:5px">{{name}}</b>
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-unlock">退出登录</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-setting" @click.native="setting()">个人设置</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-unlock" @click.native="logout()">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -76,12 +76,28 @@
 export default {
   data () {
     return {
-      collapse: false
+      collapse: false,
+      name: '',
+      avatar: ''
     }
+  },
+  created () {
+    const user = JSON.parse(window.sessionStorage.getItem('heim-73'))
+    this.name = user.name
+    this.avatar = user.photo
   },
   methods: {
     toggleMenu () {
       this.collapse = !this.collapse
+    },
+    // 给组件绑定原生事件，需要给组件解析后的原生标签绑定
+    // 使用事件修饰符 @click。prevent 默认行为  @clicknative 触发原生事件
+    setting () {
+      this.$router.push('/setting')
+    },
+    logout () {
+      window.sessionStorage.removeItem('heim-73')
+      this.$router.push('/login')
     }
   }
 }
