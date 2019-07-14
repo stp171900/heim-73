@@ -5,6 +5,7 @@ import login from '../login/index.vue'
 import Home from '../views/home/home'
 import Welcome from '../views/welcome/welcome'
 import NotFound from '../views/404/index'
+import Article from '../views/article/index.vue'
 
 Vue.use(VueRouter)
 
@@ -15,7 +16,8 @@ const router = new VueRouter({
     { path: '/',
       component: Home,
       children: [
-        { path: '/', name: 'welcome', component: Welcome }
+        { path: '/', name: 'welcome', component: Welcome },
+        { path: '/article', name: 'article', component: Article }
       ]
     },
     // 路径到这里，证明没有程序去处理当前路径
