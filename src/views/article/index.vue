@@ -3,10 +3,11 @@
     <!-- 筛选容器 -->
     <el-card>
       <div slot="header">
-        <el-breadcrumb separator-class="el-icon-arrow-right">
+        <!-- <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item>内容管理</el-breadcrumb-item>
-        </el-breadcrumb>
+        </el-breadcrumb> -->
+        <my-bread>内容管理</my-bread>
       </div>
       <!-- 筛选容器内容 -->
       <el-form :model="reqParams" size="small" label-width="80px">
@@ -49,7 +50,9 @@
 </template>
 
 <script>
+import MyBread from '../../components/my-bread'
 export default {
+  components: { MyBread },
   data () {
     return {
     // 提交给后台的筛选条件

@@ -7,9 +7,10 @@ import 'element-ui/lib/theme-chalk/index.css'
 // 引入router
 import router from './router/router'
 import axios from '../src/api/axios'
-Vue.prototype.$ajax = axios
 
-// 全局注册
+import components from '../src/components/my-bread'
+Vue.prototype.$ajax = axios
+Vue.use(components)
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 
