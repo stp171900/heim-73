@@ -55,7 +55,7 @@
       <el-table :data="articles">
         <el-table-column label="封面">
           <template slot-scope="scope">
-            <el-image lazy :src='scope.row.cover.images[0]' style="width:100px;height:75px">
+            <el-image lazy :src="scope.row.cover.images[0]" style="width:100px;height:75px">
               <div slot="error" class="image-slot">
                 <img src="../../assets/images/error.gif" width="100" height="75" alt />
               </div>
@@ -81,9 +81,16 @@
         </el-table-column>
       </el-table>
     </el-card>
+    <!-- 分页器 -->
     <div class="box">
-        <el-pagination background layout="prev, pager, next" :total="total">
-        </el-pagination>
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        @current-change='changePager'
+        :current-page="reqParams.page"
+        :page-size="reqParams.par_page"
+        :total="total">
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -117,6 +124,10 @@ export default {
     this.getArticles()
   },
   methods: {
+    changePager (newPage) {
+      this.reqParams.page = newPage
+      this.getArticles()
+    },
     search () {
       this.getArticles()
     },
@@ -125,13 +136,15 @@ export default {
       this.reqParams.end_pubdate = values[1]
     },
     async getChannelOptions () {
-      const { data: { data } } = await
-      this.$ajax.get('channels')
+      const {
+        data: { data }
+      } = await this.$ajax.get('channels')
       this.channelOptions = data.channels
     },
     async getArticles () {
-      const { data: { data } } = await
-      this.$ajax.get('articles', { params: this.reqParams })
+      const {
+        data: { data }
+      } = await this.$ajax.get('articles', { params: this.reqParams })
       this.articles = data.results
       this.total = data.total_count
     }
