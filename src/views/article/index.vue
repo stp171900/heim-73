@@ -32,6 +32,8 @@
         </el-form-item>
         <el-form-item label="时间：">
           <el-date-picker
+            value-format="yyyy-MM-dd"
+            @change="changeDate"
             v-model="dateValues"
             type="daterange"
             range-separator="至"
@@ -40,7 +42,7 @@
           ></el-date-picker>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary">筛选</el-button>
+          <el-button type="primary" @click="search()">筛选</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -54,7 +56,7 @@
         <el-table-column label="封面">
           <template slot-scope="scope">
             <el-image lazy :src='scope.row.cover.images[0]' style="width:100px;height:75px">
-              <<div slot="error" class="image-slot">
+              <div slot="error" class="image-slot">
                 <img src="../../assets/images/error.gif" width="100" height="75" alt />
               </div>
             </el-image>
@@ -95,6 +97,8 @@ export default {
       // 提交给后台的筛选条件
       // 数据默认null和'' 的区别 空字符会发生给后台 ，null不会发生字段到后台
       reqParams: {
+        page: 1,
+        per_page: 10,
         status: null,
         channel_id: null,
         begin_pubdate: null,
@@ -113,6 +117,13 @@ export default {
     this.getArticles()
   },
   methods: {
+    search () {
+      this.getArticles()
+    },
+    changeDate (values) {
+      this.reqParams.begin_pubdate = values[0]
+      this.reqParams.end_pubdate = values[1]
+    },
     async getChannelOptions () {
       const { data: { data } } = await
       this.$ajax.get('channels')
