@@ -3,10 +3,6 @@
     <!-- 筛选容器 -->
     <el-card>
       <div slot="header">
-        <!-- <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>内容管理</el-breadcrumb-item>
-        </el-breadcrumb>-->
         <my-bread>内容管理</my-bread>
       </div>
       <!-- 筛选容器内容 -->
@@ -21,14 +17,7 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="频道：">
-          <el-select v-model="reqParams.channel_id">
-            <el-option
-              v-for="item in channelOptions"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id"
-            ></el-option>
-          </el-select>
+          <my-channel v-model="reqParams.channel_id"></my-channel>
         </el-form-item>
         <el-form-item label="时间：">
           <el-date-picker
@@ -75,8 +64,8 @@
         <el-table-column label="发布时间" prop="pubdate"></el-table-column>
         <el-table-column label="操作" width="120px">
           <template slot-scope="scope">
-            <el-button icon="el-icon-edit" plain circle type="primary"></el-button>
-            <el-button icon="el-icon-delete" plain circle type="danger"></el-button>
+            <el-button icon="el-icon-edit" plain circle type="primary" @click="edit(scope.row.id)"></el-button>
+            <el-button icon="el-icon-delete" plain circle type="danger" @click="del(scope.row.id)"></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -96,9 +85,7 @@
 </template>
 
 <script>
-import MyBread from '../../components/my-bread'
 export default {
-  components: { MyBread },
   data () {
     return {
       // 提交给后台的筛选条件
@@ -111,12 +98,10 @@ export default {
         begin_pubdate: null,
         end_pubdate: null
       },
-      // 默认数据
-      channelOptions: [],
       //   日期控件数据
       dateValues: [],
       articles: [],
-      total: 100
+      total: 0
     }
   },
   created () {
@@ -124,6 +109,21 @@ export default {
     this.getArticles()
   },
   methods: {
+    del (id) {
+      this.$confirm('亲，此操作将永久删除该文章, 是否继续?', '温馨提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(async () => {
+          await this.$ajax.delete(`articles/${id}`)
+          this.getArticles()
+          this.$message.success('删除成功')
+        })
+    },
+    edit (id) {
+      this.$router.push({ path: '/publish', query: { id } })
+    },
     changePager (newPage) {
       this.reqParams.page = newPage
       this.getArticles()

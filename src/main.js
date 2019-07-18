@@ -7,8 +7,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 // 引入router
 import router from './router/router'
 import axios from '../src/api/axios'
+import './styles/index.less'
 
-import components from '../src/components/my-bread'
+import components from '../src/components'
 Vue.prototype.$ajax = axios
 Vue.use(components)
 Vue.use(ElementUI)

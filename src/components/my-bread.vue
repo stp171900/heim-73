@@ -8,7 +8,10 @@
 </template>
 
 <script>
-export default { name: 'my-bread' }
+export default {
+  name: 'my-bread'
+
+}
 </script>
 
 <style scoped lang="less">
